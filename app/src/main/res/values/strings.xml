@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SpendGuard</string>
+    <string name="notification_listener_label">SpendGuard transaction capture</string>
+    <string name="budget_channel_name">Budget alerts</string>
+    <string name="budget_channel_desc">Alerts when this month’s spending goes over your limit</string>
+</resources>

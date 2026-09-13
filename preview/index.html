@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SpendGuard preview</title>
+  <style>
+    :root {
+      --green: #1b5e4a;
+      --cream: #f7f4ee;
+      --ink: #14221c;
+      --card: #fff;
+      --error: #b3261e;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
+      background: #d9e4de;
+      color: var(--ink);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 16px;
+    }
+    h1 { margin: 0; font-size: 1.1rem; }
+    .note { max-width: 360px; text-align: center; color: #345; font-size: 0.9rem; }
+    .phone {
+      width: 360px;
+      height: 740px;
+      background: var(--cream);
+      border-radius: 36px;
+      box-shadow: 0 20px 50px rgba(20, 34, 28, 0.25);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border: 10px solid #111;
+    }
+    .screen { flex: 1; padding: 20px 16px 8px; overflow: auto; }
+    h2 { margin: 0 0 8px; }
+    p { line-height: 1.45; }
+    .card {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 16px;
+      margin: 12px 0;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    .amount { font-size: 1.8rem; font-weight: 700; }
+    .bar { height: 8px; background: #e4efe9; border-radius: 99px; overflow: hidden; }
+    .bar > span { display: block; height: 100%; width: 72%; background: var(--green); }
+    .warn { color: var(--error); font-weight: 600; }
+    button, .btn {
+      display: block;
+      width: 100%;
+      border: 0;
+      border-radius: 12px;
+      padding: 12px;
+      margin: 8px 0;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .primary { background: var(--green); color: white; }
+    .ghost { background: transparent; border: 1px solid var(--green); color: var(--green); }
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: white;
+      border-radius: 12px;
+      padding: 12px;
+      margin: 8px 0;
+    }
+    nav {
+      display: flex;
+      border-top: 1px solid #ddd;
+      background: white;
+    }
+    nav button {
+      flex: 1;
+      margin: 0;
+      border-radius: 0;
+      background: white;
+      color: #567;
+      padding: 14px;
+    }
+    nav button.active { color: var(--green); font-weight: 700; }
+    .hidden { display: none; }
+    .chip { display: inline-block; padding: 6px 10px; border-radius: 999px; background: #d8f3e8; margin: 4px 4px 0 0; font-size: 0.85rem; }
+    .chip.on { background: var(--green); color: white; }
+  </style>
+</head>
+<body>
+  <h1>SpendGuard layout preview</h1>
+  <p class="note">This is a browser mock of the Android screens. The real app needs Android Studio on a phone or emulator.</p>
+  <div class="phone">
+    <div id="onboarding" class="screen">
+      <h2>SpendGuard</h2>
+      <p>When you pay with bKash, Nagad, a bank app, or UPI, SpendGuard reads that payment notification and adds the amount for you.</p>
+      <p>Turn on notification access so it can see payment alerts. It does not read other people’s phones.</p>
+      <button class="ghost" type="button">Enable payment capture</button>
+      <button class="primary" type="button" onclick="show('home')">Continue</button>
+    </div>
+    <div id="home" class="screen hidden">
+      <h2>This month</h2>
+      <div class="card">
+        <div class="amount">BDT 18,400</div>
+        <div class="bar"><span></span></div>
+        <p>Budget BDT 25,000</p>
+      </div>
+      <button class="primary" type="button">Add expense</button>
+      <p><strong>Transactions</strong></p>
+      <div class="row"><div>Grocery Mart<br><small>13 Sep, 09:12 AM · notification</small></div><div>BDT 450</div></div>
+      <div class="row"><div>Ride<br><small>12 Sep, 07:40 PM · notification</small></div><div>BDT 220</div></div>
+      <div class="row"><div>Cafe<br><small>11 Sep, 01:05 PM · manual</small></div><div>BDT 680</div></div>
+    </div>
+    <div id="settings" class="screen hidden">
+      <h2>Budget</h2>
+      <div class="card">Monthly limit: 25000</div>
+      <button class="primary" type="button">Save budget</button>
+      <p>Currency</p>
+      <span class="chip on">BDT</span><span class="chip">INR</span><span class="chip">USD</span>
+      <p>Alarm when I go over: on</p>
+      <h2>Automatic capture</h2>
+      <p>SpendGuard can read payment notifications on this phone.</p>
+      <button class="ghost" type="button">Open notification access</button>
+    </div>
+    <nav id="nav" class="hidden">
+      <button class="active" type="button" onclick="show('home')">Home</button>
+      <button type="button" onclick="show('settings')">Settings</button>
+    </nav>
+  </div>
+  <script>
+    function show(id) {
+      ["onboarding", "home", "settings"].forEach((s) => {
+        document.getElementById(s).classList.toggle("hidden", s !== id);
+      });
+      const nav = document.getElementById("nav");
+      nav.classList.toggle("hidden", id === "onboarding");
+      [...nav.querySelectorAll("button")].forEach((b) => {
+        b.classList.toggle("active", b.textContent.toLowerCase() === id);
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "REPLACE_ME",
+    "project_id": "spendguard-replace-me",
+    "storage_bucket": "spendguard-replace-me.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:REPLACE_ME:android:REPLACE_ME",
+        "android_client_info": {
+          "package_name": "com.spendguard.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "REPLACE_ME"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
